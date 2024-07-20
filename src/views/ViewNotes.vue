@@ -34,21 +34,22 @@
         
         <Note v-for="note in notesStore.notes" :key="note.id"
             :note="note"></Note>
-
-            <!-- @delete="deleteNote" -->
         
     </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
 import Note from '@/components/Notes/Note.vue';
 import { useNotesStore } from '@/stores/storeNote';
 import AddEditNote from '@/components/Notes/AddEditNote.vue'
+import { useWatchCharacters } from '@/use/useWatchCharacters';
 
+const notesStore = useNotesStore();
 
 const newNote = ref('');
 const addEditNoteRef = ref(null);
+
 const postNewNoteHandler = () => {
     notesStore.addNewNote(newNote.value);
     
@@ -57,11 +58,7 @@ const postNewNoteHandler = () => {
     addEditNoteRef.value.focusTextarea()
 
 }
-const notesStore = useNotesStore();
-// const deleteNote = (id)=>{
 
-//     let index = notes.value.findIndex((note)=> note.id==id);
-//     if(index !== -1) notes.value.splice(index,1)
-
-// }
+//watcher using composable
+useWatchCharacters(newNote)
 </script>

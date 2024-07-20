@@ -10,7 +10,11 @@
             <textarea 
                 v-model="noteValue"
                 ref="textreaRef" 
-                class="textarea" placeholder="Textarea"></textarea>
+                class="textarea" 
+                placeholder="Textarea"
+                maxlength="100"
+                v-autofocus
+                ></textarea>
         </div>
     </div>
 
@@ -25,7 +29,9 @@
 </template>
 
 <script setup>
+import { vAutofocus } from '@/directives/vAutofocus';
 import { ref } from 'vue';
+
 
 
 const noteValue = defineModel();
@@ -40,15 +46,17 @@ const props = defineProps({
 const textreaRef = ref(null)
 const focusTextarea = () =>{
     textreaRef.value.focus()
-
 }
 
-defineExpose({focusTextarea})
+defineExpose({focusTextarea}) // allow parent to call this function
 
-// const props = defineProps({
-//     noteValue : {
-//         type: String,
-//         required: true
-//     }
-// })
+/* defining local directive
+
+const vAutofocus = {
+    mounted: (el) =>{
+        el.focus()
+        // console.log(el,'el');
+    }
+}
+*/
 </script>
