@@ -41,7 +41,6 @@ const addEditNoteRef = ref(null);
 const noteStore = useNotesStore();
 
 onMounted(()=>{
-    console.log('id', route.params.id)
     getNoteDetail()
 })
 
